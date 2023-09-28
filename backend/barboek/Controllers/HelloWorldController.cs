@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace barboek.Controllers
@@ -14,9 +15,11 @@ namespace barboek.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
-            var response = new { message = "Hello world!" };
+            Guid userId = Guid.Parse(User.FindFirst("userId").Value);
+            var response = new { message = $"Hello {userId}!" };
             return Ok(response);
         }
     }

@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "barboek", "barboek\barboek.csproj", "{044AAE7F-80D9-4A5B-BBD1-8AEF3457C861}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "barboek", "barboek\barboek.csproj", "{044AAE7F-80D9-4A5B-BBD1-8AEF3457C861}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "barboek.Interface", "barboek.interface\barboek.Interface.csproj", "{0A33419D-C27B-4497-B743-41881DE1FCDE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "barboek.Data", "barboek.Data\barboek.Data.csproj", "{C084B205-AD48-4DDF-B6E6-BBDBC52F4BFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "barboek.Auth", "barboek.Auth\barboek.Auth.csproj", "{BF5F932D-5B32-416B-94BC-0E065932CAA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{044AAE7F-80D9-4A5B-BBD1-8AEF3457C861}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{044AAE7F-80D9-4A5B-BBD1-8AEF3457C861}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{044AAE7F-80D9-4A5B-BBD1-8AEF3457C861}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A33419D-C27B-4497-B743-41881DE1FCDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A33419D-C27B-4497-B743-41881DE1FCDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A33419D-C27B-4497-B743-41881DE1FCDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A33419D-C27B-4497-B743-41881DE1FCDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C084B205-AD48-4DDF-B6E6-BBDBC52F4BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C084B205-AD48-4DDF-B6E6-BBDBC52F4BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C084B205-AD48-4DDF-B6E6-BBDBC52F4BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C084B205-AD48-4DDF-B6E6-BBDBC52F4BFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF5F932D-5B32-416B-94BC-0E065932CAA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF5F932D-5B32-416B-94BC-0E065932CAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF5F932D-5B32-416B-94BC-0E065932CAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF5F932D-5B32-416B-94BC-0E065932CAA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

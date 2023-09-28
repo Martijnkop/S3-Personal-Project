@@ -1,3 +1,7 @@
 .suo
 *.cache
 Debug/
+*.vsidx
+*.bin
+.dtbcache.v2
+.futdcache.v2

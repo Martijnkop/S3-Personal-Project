@@ -4,17 +4,17 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:20729",
-      "sslPort": 44330
+      "applicationUrl": "http://localhost:57932",
+      "sslPort": 44395
     }
   },
   "profiles": {
-    "barboek": {
+    "barboek.Auth": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "https://api.localhost:6840;http://localhost:5091",
+      "applicationUrl": "https://auth.localhost:6841;http://localhost:5234",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
