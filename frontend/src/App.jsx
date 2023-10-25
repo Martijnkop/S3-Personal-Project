@@ -21,6 +21,7 @@ function App() {
   function HandleInput(e) {
     let text = e.target.value
     setName(text)
+    setId('')
     if (text != '') {
       const fetchInput = async () => {
         const response = await fetch('https://api.localhost:6840/accounts/list', {
@@ -33,7 +34,6 @@ function App() {
       });
 
       if (response.status == 404) return;
-      console.log(response)
       const d = await response.json()
       setList(d.body)
       }
@@ -48,8 +48,6 @@ function App() {
     console.log(e)
     console.log(id)
   }
-
-  console.log(accessToken)
 
   return (
     <>
@@ -66,7 +64,7 @@ function App() {
                 setName(item.name)
                 setId(item.id)
                 setList('')
-                }}>{item.name}</li>)}
+                }} key={item.id}>{item.name}</li>)}
             </ul>
           )}
           <button className='search' onClick={(e) => HandleSearch(e)}>search!</button>

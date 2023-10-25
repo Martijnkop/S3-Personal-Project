@@ -15,10 +15,10 @@ function HtmlRequest(method, url, body, auth) {
 
       return response
       }
-    let a = fetchInput().then(response => {
+    let res = fetchInput().then(response => {
         return response;
     })
-    return a;
+    return res;
 }
 
 export default HtmlRequest
