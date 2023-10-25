@@ -4,10 +4,10 @@ import Login from './Views/Login'
 import Nav from './Views/Nav'
 import Auth from './Util/Auth'
 import Products from './Pages/Products'
+import { useSelector } from 'react-redux'
 
 function App() {
-  const [refreshToken, setRefreshToken] = useState(null)
-  const [accessToken, setAccessToken] = useState(null)
+  const accessToken = useSelector((state) => state.auth.value.accessToken)
   const [list, setList] = useState('')
   const [name, setName] = useState('')
   const [id, setId] = useState('')
@@ -49,10 +49,12 @@ function App() {
     console.log(id)
   }
 
+  console.log(accessToken)
+
   return (
     <>
-      <Auth ref={authRef} setAccessToken={setAccessToken} setRefreshToken={setRefreshToken}>
-      {(accessToken == null || accessToken == undefined	) && (<Login submit={HandleLogin}/>)}
+      <Auth ref={authRef}>
+      {(accessToken == '') && (<Login submit={HandleLogin}/>)}
         <Nav />
         <main>
           <div className='searchContainer'>

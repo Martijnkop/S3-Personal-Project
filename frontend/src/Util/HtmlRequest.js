@@ -1,4 +1,4 @@
-async function HtmlRequest(method, url, body, auth) {
+function HtmlRequest(method, url, body, auth) {
     const fetchInput = async () => {
         let headers;
         if (auth == null) {
@@ -15,8 +15,10 @@ async function HtmlRequest(method, url, body, auth) {
 
       return response
       }
-    let response = await fetchInput()
-    return response
+    let a = fetchInput().then(response => {
+        return response;
+    })
+    return a;
 }
 
 export default HtmlRequest

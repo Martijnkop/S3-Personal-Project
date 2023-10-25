@@ -1,7 +1,10 @@
 import React, { useImperativeHandle, useEffect } from 'react'
 import HtmlRequest from './HtmlRequest'
+import { useDispatch } from 'react-redux'
+import { setAccessToken, setRefreshToken, removeAccessToken, removeRefreshToken } from '../Store/authSlice'
 
-const Auth = React.forwardRef(({children, setAccessToken, setRefreshToken}, ref) => {
+const Auth = React.forwardRef(({children}, ref) => {
+    const dispatch = useDispatch()
 
     useImperativeHandle(ref, () => ({
         HandleLogin(email, password) {
@@ -16,18 +19,18 @@ const Auth = React.forwardRef(({children, setAccessToken, setRefreshToken}, ref)
             {
                 email: email,
                 password: password
-            }).then(function(res) {
-                res.json().then(response => {
+            }).then( res => {
+            res.json().then(response => {
                     if (response.refreshToken != null) {
                         localStorage.setItem('refreshToken', response.refreshToken.replace(/-/g, ""))
-                        setRefreshToken(response.refreshToken.replace(/-/g, ""))
+                        dispatch(setRefreshToken(response.refreshToken.replace(/-/g, "")))
                     }
                     if (response.accessToken != undefined) {
                         localStorage.setItem('accessToken', response.accessToken)
-                        setAccessToken(response.accessToken)
+                        dispatch(setAccessToken(response.accessToken))
                 }
-                })
             })
+        })
     }
 
     useEffect(() => {
@@ -35,13 +38,13 @@ const Auth = React.forwardRef(({children, setAccessToken, setRefreshToken}, ref)
         let refreshToken;
         if (temp1 != null) {
             refreshToken = (temp1.replace(/-/g, ""))
-            setRefreshToken(refreshToken)
+            dispatch(setRefreshToken(refreshToken))
         }
         let temp2 = localStorage.getItem('accessToken')
         let accessToken;
         if (temp2 != null) {
             accessToken = (temp2.replace(/-/g, ""))
-            setAccessToken(accessToken)
+            dispatch(setAccessToken(accessToken))
         }
         if (refreshToken != null && accessToken == null) {
         const response = HtmlRequest(
@@ -51,16 +54,20 @@ const Auth = React.forwardRef(({children, setAccessToken, setRefreshToken}, ref)
                 res.json().then(response => {
                     if (response.refreshToken != null) {
                         localStorage.setItem('refreshToken', response.refreshToken.replace(/-/g, ""))
-                        setRefreshToken(response.refreshToken)
+                        dispatch(setRefreshToken(response.refreshToken))
+                    } else {
+                        dispatch(removeRefreshToken())
                     }
                     if (response.accessToken != undefined) {
                         localStorage.setItem('accessToken', response.accessToken)
-                        setAccessToken(response.accessToken)
-                }
+                        dispatch(setAccessToken(response.accessToken))
+                    } else {
+                        dispatch(removeAccessToken())
+                    }
                 })
             })
         }
-      })
+    })
 
     return (
         <>
