@@ -1,0 +1,83 @@
+#root {
+    display: flex;
+    height: 100vh; /* Set the height of the app container to 100% of the viewport height */
+  }
+  
+  #sidebar {
+    width: 250px;
+    background-color: #333;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: white;
+  }
+
+  main {
+    flex: 1;
+    background-color: #555; /* Dark mode background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+  }
+
+  .searchContainer {
+    background-color: #777; /* Dark mode search container background color */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    padding: 20px;
+    width: calc(100% - 100px);
+    box-sizing: border-box;
+    height: 70%;
+}
+
+#nameSearcher {
+  border: none;
+  padding: 10px;
+  width: calc(100% - 20px);
+  border-radius: 5px;
+}
+
+#nameSearcher:focus-visible {
+  outline: none;
+}
+
+.namelist {
+  position: absolute;
+  margin-top: 0;
+  right: 200px;
+  left: 70px;
+  list-style: none;
+  padding: 0;
+}
+
+.namelist li:nth-child(2n-1) {
+  background: #45494f;
+}
+
+.namelist li {
+  padding: 10px 15px 12px 15px;
+  background: #3d4004;
+  color: #c2c8cf;
+  border: none;
+  font-size: large;
+  opacity: 0.9;
+}
+
+.namelist>p {
+  background-color: green;
+  margin: 0;
+  padding: 10px 20px 10px 20px;
+  right: 150px;
+}
+
+.search {
+  background-color: #007BFF;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+}

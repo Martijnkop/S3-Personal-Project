@@ -4,9 +4,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Runtime.ConstrainedExecution;
+using Newtonsoft.Json;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
 
 namespace barboek.Auth.Controllers;
 
@@ -28,8 +31,16 @@ public class AccountController : ControllerBase
     [HttpPost]
     [Route("register")]
     [Produces("application/json")]
-    public IActionResult Register(string email, string password)
+    public IActionResult Register([FromBody]UserModel model)
     {
+        if (model == null)
+        {
+            return BadRequest("Invalid data");
+        }
+
+        string email = model.email;
+        string password = model.password;
+
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
             return BadRequest();
@@ -66,8 +77,17 @@ public class AccountController : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public IActionResult Login(string email, string password)
+    public IActionResult Login([FromBody] UserModel model)
     {
+
+        if (model == null)
+        {
+            return BadRequest("Invalid data");
+        }
+
+        string email = model.email;
+        string password = model.password;
+
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
             return BadRequest();
@@ -91,7 +111,7 @@ public class AccountController : ControllerBase
         {
             valid = true,
             accessToken = NewAccessToken(account),
-            refreshToken = BitConverter.ToString(refreshtoken),
+            refreshToken = Convert.ToHexString(refreshtoken),
         };
 
         _dbContext.Accounts.Update(account);
@@ -150,10 +170,11 @@ public class AccountController : ControllerBase
         }
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("validaterefreshtoken")]
-    public IActionResult ValidateRefreshToken(string refreshToken)
+    public IActionResult ValidateRefreshToken([FromBody] RefreshTokenModel refresh)
     {
+        string refreshToken = refresh.RefreshToken.Replace("-", "");
         if (refreshToken == null || refreshToken.Length == 0)
         {
             return BadRequest();
@@ -178,7 +199,7 @@ public class AccountController : ControllerBase
         {
             valid = true,
             accessToken = accessToken,
-            refreshToken = BitConverter.ToString(user.RefreshToken)
+            refreshToken = Convert.ToHexString(user.RefreshToken)
         };
 
         return Ok(returnObject);
@@ -238,5 +259,16 @@ public class AccountController : ControllerBase
 
             return sha.ComputeHash(completeBytes).ToArray();
         }
+    }
+
+    public class UserModel
+    {
+        public string email { get; set; }
+        public string password { get; set; }
+    }
+
+    public class RefreshTokenModel
+    {
+        public string RefreshToken { get; set; }
     }
 }

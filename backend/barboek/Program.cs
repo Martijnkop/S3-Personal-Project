@@ -1,4 +1,6 @@
 using barboek.Data;
+using barboek.Interface;
+using barboek.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -16,12 +18,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataStore>();
+builder.Services.AddScoped<AccountService>();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "frontend", builder =>
     {
-        builder.WithOrigins("http://127.0.0.1:5173", "http://localhost:5173");
+        builder.WithOrigins("http://127.0.0.1:5173", "http://localhost:5173")
+        .AllowAnyHeader();
     });
 });
 
@@ -51,8 +55,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("frontend");
 app.UseHttpsRedirection();
+app.UseCors("frontend");
 
 app.MapControllers();
 
