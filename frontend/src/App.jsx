@@ -4,6 +4,7 @@ import Login from './Views/Login'
 import Nav from './Views/Nav'
 import Auth from './Util/Auth'
 import { useSelector } from 'react-redux'
+import MainPage from './Pages/Main'
 
 function App() {
   const accessToken = useSelector((state) => state.auth.value.accessToken)
@@ -20,7 +21,7 @@ function App() {
       {(accessToken == '') && (<Login submit={HandleLogin}/>)}
         <Nav />
         <main>
-          
+          <MainPage />
         </main>
       </Auth>
     </>

@@ -1,9 +1,13 @@
 import { useState } from "react"
+import { useSelector } from 'react-redux'
+
 
 function MainPage() {
   const [list, setList] = useState('')
   const [name, setName] = useState('')
   const [id, setId] = useState('')
+
+  const accessToken = useSelector((state) => state.auth.value.accessToken)
 
     function HandleInput(e) {
         let text = e.target.value
