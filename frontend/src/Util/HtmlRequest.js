@@ -10,9 +10,11 @@ function HtmlRequest(method, url, body, auth) {
         else {
             headers = {'Content-Type': 'application/json','Authorization': `Bearer ${auth}`}
         }
+        let parsedBody = undefined;
+        if (method != "GET") parsedBody = JSON.stringify(body)
         const response = await fetch(url, {
         method: method,
-        body: JSON.stringify(body),
+        body: parsedBody,
         headers: headers
       });
 
