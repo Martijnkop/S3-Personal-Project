@@ -34,3 +34,24 @@
     margin: 0.5%;
     display: inline-block;
   }
+
+  .cart {
+    position: absolute;
+    right: 0px;
+    width: 360px;
+    box-sizing: border-box;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+
+  .cart>div {
+    box-sizing: border-box;
+    padding: 10px;
+    background-color: #777;
+  }
+
+  .cart>div:nth-child(2n - 1) {
+    background-color: #666;
+  }

@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataStore>();
 builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<ItemService>();
 
 builder.Services.AddCors(options =>
 {
