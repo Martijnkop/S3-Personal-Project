@@ -1,13 +1,17 @@
 import { useRef } from 'react'
-import './App.css'
 import Login from './Views/Login'
 import Nav from './Views/Nav'
 import Auth from './Util/Auth'
 import { useSelector } from 'react-redux'
-import MainPage from './Pages/Main'
+import {
+  BrowserRouter, Routes, Route
+} from "react-router-dom";
+import Home from './Pages/Home'
+import Products from './Pages/Products'
 
 function App() {
-  const accessToken = useSelector((state) => state.auth.value.accessToken)
+  const accessToken = useSelector((state) => state.auth.value.accessToken) 
+  console.log(accessToken)
 
   const authRef = useRef()
 
@@ -16,15 +20,17 @@ function App() {
   }
 
   return (
-    <>
-      <Auth ref={authRef}>
+    
+    <Auth ref={authRef}>
       {(accessToken == '') && (<Login submit={HandleLogin}/>)}
-        <Nav />
-        <main>
-          <MainPage />
-        </main>
-      </Auth>
-    </>
+        <BrowserRouter>
+      <Nav />
+          <Routes>
+              <Route path="/" element = {<Home /> }/>
+              <Route path="/products" element = {<Products />} />
+          </Routes>
+        </BrowserRouter>
+    </Auth>
   )
 }
 

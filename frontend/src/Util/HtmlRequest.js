@@ -1,3 +1,6 @@
+import store from '../Store/store'
+import { removeAccessToken } from '../Store/authSlice';
+
 function HtmlRequest(method, url, body, auth) {
     const fetchInput = async () => {
         let headers;
@@ -16,8 +19,14 @@ function HtmlRequest(method, url, body, auth) {
       return response
       }
     let res = fetchInput().then(response => {
+        if (response.status == 401) {
+            console.log(store)
+            store.dispatch(removeAccessToken())
+            console.log('removed access token')
+        }
         return response;
     })
+    
     return res;
 }
 

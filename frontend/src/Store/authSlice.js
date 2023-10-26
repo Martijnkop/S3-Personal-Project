@@ -31,6 +31,7 @@ export const authSlice = createSlice({
         },
         removeRefreshToken: (state) => {
             let oldState = state.value;
+            localStorage.setItem('refreshToken', '')
             state.value = {
                 validRefreshToken: false,
                 refreshToken: '',
@@ -40,6 +41,7 @@ export const authSlice = createSlice({
         },
         removeAccessToken: (state) => {
             let oldState = state.value;
+            localStorage.setItem('accessToken', '')
             state.value = {
                 validRefreshToken: oldState.validRefreshToken,
                 refreshToken: oldState.refreshToken,

@@ -1,0 +1,36 @@
+.products-page {
+    flex: 1;
+    background-color: #555; /* Dark mode background color */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+  }
+
+  .test2 {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 360px;
+    bottom: 0;
+    overflow: auto;
+
+  }
+.test {
+    position: absolute;
+    width: 100%;
+    overflow-x: hidden; 
+  }
+  
+  .test-item { 
+    background-color: #ccc;
+    text-align: center;
+    border: 1px solid #999;
+    cursor: pointer;
+    width: 18.5%;
+    padding-bottom: 18.5%;
+    margin: 0.5%;
+    display: inline-block;
+  }

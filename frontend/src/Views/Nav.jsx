@@ -1,12 +1,15 @@
 import './Nav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faCog } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 function Nav() {
+    const navigate = useNavigate();
+
     return (
     <div id="sidebar">
         <ul>
-        <li>
+        <li onClick={() => {navigate('/')}}>
             <FontAwesomeIcon icon={faHome} className="icon" />
             <h1 href="#">
                 Home
