@@ -11,7 +11,7 @@ function Products() {
     const accessToken = useSelector((state) => state.auth.value.accessToken)
 
     const [selected, setSelected] = useState(null);
-    const [itemList, setItemList] = useState([]);
+    const [itemList, setItemList] = useState(null);
 
     const data = useLocation();
     let id = data.state.id
@@ -31,8 +31,9 @@ function Products() {
 
         }
 
-        if (accessToken) fetchData()
-    },[])
+        if (!itemList) fetchData()
+    }, [itemList, accessToken])
+
 
     function addItem(i) {
         let map;
@@ -58,7 +59,10 @@ function Products() {
 
     <div className="test">
         {itemList && itemList.map(item =>
-            <div className="test-item" key={item.id} onClick={() => {addItem({...item})}}>{item.name}</div>
+            <div className="test-item" key={item.id} onClick={() => {addItem({...item})}}><div>
+                {item.name}
+                </div>
+                </div>
             )}
     </div>
             </div>

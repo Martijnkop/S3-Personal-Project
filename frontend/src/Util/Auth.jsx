@@ -5,6 +5,7 @@ import { setAccessToken, setRefreshToken, removeAccessToken, removeRefreshToken 
 
 const Auth = React.forwardRef(({children}, ref) => {
     const accessToken = useSelector((state) => state.auth.value.accessToken)
+    const refreshToken = useSelector((state) => state.auth.value.refreshToken)
     const dispatch = useDispatch()
 
     useImperativeHandle(ref, () => ({
@@ -47,7 +48,7 @@ const Auth = React.forwardRef(({children}, ref) => {
             accessToken = (temp2.replace(/-/g, ""))
             dispatch(setAccessToken(accessToken))
         }
-        if (refreshToken != null && accessToken == null) {
+        if (refreshToken != null && (accessToken == null || accessToken == '')) {
         const response = HtmlRequest(
             'POST',
             'https://auth.localhost:6841/accounts/validateRefreshToken',
@@ -68,7 +69,7 @@ const Auth = React.forwardRef(({children}, ref) => {
                 })
             })
         }
-    },[accessToken])
+    },[accessToken, refreshToken])
 
     return (
         <>

@@ -6,8 +6,6 @@
   #sidebar {
     width: 250px;
     background-color: #333;
-    padding-top: 20px;
-    padding-bottom: 20px;
     color: white;
   }
 
@@ -28,9 +26,12 @@
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
     padding: 20px;
-    width: calc(100% - 100px);
+    width: 80%;
     box-sizing: border-box;
     height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 #nameSearcher {
@@ -38,6 +39,7 @@
   padding: 10px;
   width: calc(100% - 20px);
   border-radius: 5px;
+  height: 25px;
 }
 
 #nameSearcher:focus-visible {
@@ -46,9 +48,9 @@
 
 .namelist {
   position: absolute;
-  margin-top: 0;
-  right: 200px;
-  left: 70px;
+  margin-top: 45px;
+  right: calc(10% + 100px);
+  left: calc(10% + 20px);
   list-style: none;
   padding: 0;
 }
@@ -80,4 +82,8 @@
   border-radius: 5px;
   padding: 10px 20px;
   cursor: pointer;
+  width: 20%;
+  margin-top: 20px;
+  height: 45px;
+  box-sizing: border-box;
 }

@@ -33,6 +33,16 @@
     padding-bottom: 18.5%;
     margin: 0.5%;
     display: inline-block;
+    user-select: none;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+  }
+
+  .test-item>div {
+    position: absolute;
+    bottom: calc(50% - 10px);
+    width: 100%;
+    font-size: 20px;
   }
 
   .cart {
@@ -44,12 +54,18 @@
     bottom: 0;
     overflow: auto;
     overflow-x: hidden;
+    background-color: #444;
+    padding: 2px;
   }
 
   .cart>div {
     box-sizing: border-box;
     padding: 10px;
+    margin: 2px;
     background-color: #777;
+    user-select: none;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
   }
 
   .cart>div:nth-child(2n - 1) {
