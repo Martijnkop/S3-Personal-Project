@@ -14,11 +14,11 @@ function Products() {
     const [itemList, setItemList] = useState(null);
 
     const data = useLocation();
-    let id = data.state.id
+    let id =data.state.id
 
-    if (accessToken == '' || id == undefined || id == '') navigate('/')
-
+    
     useEffect(() => {
+        if (accessToken == '' || id == undefined || id == '') navigate('/')
         const fetchData = async () => {
         const response = await HtmlRequest(
             'GET',
@@ -43,12 +43,35 @@ function Products() {
             map = selected
         }
         if (map[i.id]) {
-            map[i.id] = selected[i.id] + 1
+            map[i.id] = selected[i.id] + 1;
         } else {
             map[i.id] = 1
         }
         setSelected({...map})
         console.log(map)
+    }
+
+    function removeItem(i) {
+        let map;
+        if (selected == null) return;
+        else map = selected
+        if (map[i.id]) {
+            if (map[i.id] > 1) map[i.id] -- ;
+            else delete map[i.id]
+        }
+        setSelected({...map})
+        console.log(map)
+    }
+
+    async function order() {
+        await HtmlRequest("POST",
+        "https://api.localhost:6840/Orders/create",
+        {
+            AccountOrdered: id,
+            OrderItems: selected
+        },
+        accessToken)
+        navigate('/')
     }
 
     if (selected) console.log(Object.keys(selected))
@@ -67,10 +90,16 @@ function Products() {
     </div>
             </div>
             <section className="cart">
+                <div>
+
 
             {(selected != null) && Object.keys(selected).map(item => {
                 let i = itemList.find((i) => i.id == item)
-                return <div key={i.id}>{i.name} - {selected[item]}</div>})}
+                return <div key={i.id} onClick={() => {removeItem(i)}} className="cart-item">{i.name} - {selected[item]}</div>})}
+                </div>
+                <div className="order">
+                    <div className="order-button" onClick={() => {order()}}>Order</div>
+                </div>
             </section>
     </main>)
 }

@@ -28,6 +28,21 @@ public class AccountsController : ControllerBase
         };
         return Ok(returnObject);
     }
+
+    [HttpPost]
+    [Route("test_AddUser")]
+    [Authorize]
+    public IActionResult AddUser([FromBody]AddUserBody body)
+    {
+        _accountService.AddUser(body.Name);
+        return Ok();
+    }
+
+    public struct AddUserBody
+    {
+        public string Name { get; set; }
+    }
+
     public struct ListBody
     {
         public string Filter { get; set;}

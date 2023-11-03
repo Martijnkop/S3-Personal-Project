@@ -12,6 +12,7 @@ function HtmlRequest(method, url, body, auth) {
         }
         let parsedBody = undefined;
         if (method != "GET") parsedBody = JSON.stringify(body)
+        console.log(parsedBody)
         const response = await fetch(url, {
         method: method,
         body: parsedBody,
@@ -22,7 +23,6 @@ function HtmlRequest(method, url, body, auth) {
       }
     let res = fetchInput().then(response => {
         if (response.status == 401) {
-            console.log(store)
             store.dispatch(removeAccessToken())
             console.log('removed access token')
         }

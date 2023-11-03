@@ -58,7 +58,7 @@
     padding: 2px;
   }
 
-  .cart>div {
+  .cart-item{
     box-sizing: border-box;
     padding: 10px;
     margin: 2px;
@@ -66,8 +66,30 @@
     user-select: none;
     color: white;
     font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
   }
 
-  .cart>div:nth-child(2n - 1) {
+  .cart-item:nth-child(2n - 1) {
     background-color: #666;
+  }
+
+  .order {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 2px;
+    position: absolute;
+  }
+
+  
+  .order-button {
+    background-color: lime;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 2px;
+    user-select: none;
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
   }

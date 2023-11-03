@@ -2,6 +2,7 @@
 using barboek.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace barboek.Controllers;
 [ApiController]
@@ -28,5 +29,20 @@ public class ItemsController : ControllerBase
             body = Items,
         };
         return Ok(returnObject);
+    }
+
+
+    [HttpPost]
+    [Route("test_AddItem")]
+    [Authorize]
+    public IActionResult AddItem([FromBody] AddItemBody body)
+    {
+        _itemService.AddItem(body.Name);
+        return Ok();
+    }
+
+    public struct AddItemBody
+    {
+        public string Name { get; set; }
     }
 }

@@ -19,9 +19,15 @@ public class AccountService
         //temp
         if (_dbContext.Accounts.IsNullOrEmpty())
         {
-            _dbContext.Accounts.Add(new Account { Id = Guid.Empty, Name = "admin" });
-            _dbContext.SaveChanges();
+            AddUser();
         }
-        return _dbContext.Accounts.Where(a => a.Name.Contains(filter.ToLower())).Take(10).ToList();
+        return _dbContext.Accounts.Where(a => a.Name.ToLower().Contains(filter.ToLower())).Take(10).ToList();
+    }
+
+    public void AddUser(string name = "admin")
+    {
+        if (string.IsNullOrEmpty(name) || _dbContext.Accounts.Any(account => account.Name == name)) return;
+        _dbContext.Accounts.Add(new Account { Id = Guid.NewGuid(), Name = name });
+        _dbContext.SaveChanges();
     }
 }
