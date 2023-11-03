@@ -20,12 +20,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataStore>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ItemService>();
+builder.Services.AddScoped<OrderService>();
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "frontend", builder =>
     {
-        builder.WithOrigins("http://127.0.0.1:5173", "http://localhost:5173")
+        builder.WithOrigins("https://localhost")
         .AllowAnyHeader();
     });
 });
