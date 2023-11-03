@@ -1,7 +1,7 @@
 import React, { useImperativeHandle, useEffect } from 'react'
 import HtmlRequest from './HtmlRequest'
 import { useDispatch, useSelector } from 'react-redux'
-import { setAccessToken, setRefreshToken, removeAccessToken, removeRefreshToken } from '../Store/authSlice'
+import { setAccessToken, setRefreshToken, removeAccessToken, removeRefreshToken } from './Store/authSlice'
 
 const Auth = React.forwardRef(({children}, ref) => {
     const accessToken = useSelector((state) => state.auth.value.accessToken)

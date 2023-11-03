@@ -1,5 +1,5 @@
-import store from '../Store/store'
-import { removeAccessToken } from '../Store/authSlice';
+import store from './Store/store'
+import { removeAccessToken } from './Store/authSlice';
 
 function HtmlRequest(method, url, body, auth) {
     const fetchInput = async () => {
