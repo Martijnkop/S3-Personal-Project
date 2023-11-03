@@ -24,7 +24,7 @@ function App() {
     <Auth ref={authRef}>
       {(accessToken == '') && (<Login submit={HandleLogin}/>)}
         <BrowserRouter>
-      <Nav />
+        <Nav />
           <Routes>
               <Route path="/" element = {<Home /> }/>
               <Route path="/products" element = {<Products />} />
