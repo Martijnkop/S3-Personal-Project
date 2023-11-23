@@ -37,12 +37,13 @@ public class ItemsController : ControllerBase
     [Authorize]
     public IActionResult AddItem([FromBody] AddItemBody body)
     {
-        _itemService.AddItem(body.Name);
+        _itemService.AddItem(body.Name, body.Price);
         return Ok();
     }
 
     public struct AddItemBody
     {
         public string Name { get; set; }
+        public Guid Price { get; set; }
     }
 }

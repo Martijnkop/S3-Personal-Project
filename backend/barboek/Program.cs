@@ -21,6 +21,7 @@ builder.Services.AddDbContext<DataStore>();
 builder.Services.AddScoped<AccountService>();
 builder.Services.AddScoped<ItemService>();
 builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<FinanceService>();
 
 builder.Services.AddCors(options =>
 {
