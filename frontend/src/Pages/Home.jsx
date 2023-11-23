@@ -49,7 +49,7 @@ function Home() {
 
     return (
       <main className="home">
-      <div className='searchContainer'>
+        <div className='searchContainer'>
           <input id="nameSearcher" onInput={(e) => HandleInput(e)} value={name}></input>
           {list != '' && (
             <ul className='namelist'>
@@ -61,8 +61,8 @@ function Home() {
             </ul>
           )}
           <button className='search' onClick={(e) => HandleSearch(e)}>search!</button>
-          </div>
-          </main>
+        </div>
+      </main>
     )
 
 }

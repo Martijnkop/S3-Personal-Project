@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using barboek.Data;
@@ -11,9 +12,11 @@ using barboek.Data;
 namespace barboek.Data.Migrations
 {
     [DbContext(typeof(DataStore))]
-    partial class DataStoreModelSnapshot : ModelSnapshot
+    [Migration("20231122211638_Prices")]
+    partial class Prices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,6 +45,9 @@ namespace barboek.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<double>("CurrentPrice")
+                        .HasColumnType("double precision");
 
                     b.Property<string>("Name")
                         .IsRequired()
