@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 
 import HtmlRequest from "../Util/HtmlRequest";
 
+import Product from "../Components/Product";
+import SelectedProduct from "../Components/SelectedProduct";
+
 import './Products.css'
 
 function Products() {
@@ -28,6 +31,7 @@ function Products() {
         let body = await response.json()
 
         setItemList(body.body)
+        console.log(body.body)
 
         }
 
@@ -78,29 +82,30 @@ function Products() {
 
     return (
     <main className="products-page">
-        <div className="test2">
+        <section className="products-list">
 
-    <div className="test">
-        {itemList && itemList.map(item =>
-            <div className="test-item" key={item.id} onClick={() => {addItem({...item})}}><div>
-                {item.name}
-                </div>
-                </div>
-            )}
-    </div>
+            <div className="products-wrapper">
+                {itemList && itemList.map(item =>
+                    <Product item = {item} add = {addItem} />    
+                )}
             </div>
-            <section className="cart">
-                <div>
 
+        </section>
+
+        <section className="cart">
 
             {(selected != null) && Object.keys(selected).map(item => {
                 let i = itemList.find((i) => i.id == item)
-                return <div key={i.id} onClick={() => {removeItem(i)}} className="cart-item">{i.name} - {selected[item]}</div>})}
+                return <SelectedProduct item = {i} remove = {removeItem} count = {selected[item]} />
+            })}
+            
+            <div className="order">
+                <div className="order-button" onClick={() => {order()}}>
+                    Order
                 </div>
-                <div className="order">
-                    <div className="order-button" onClick={() => {order()}}>Order</div>
-                </div>
-            </section>
+            </div>
+
+        </section>
     </main>)
 }
 

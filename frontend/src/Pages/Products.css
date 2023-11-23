@@ -9,7 +9,7 @@
     position: relative;
   }
 
-  .test2 {
+  .products-list {
     position: absolute;
     left: 0;
     top: 0;
@@ -18,13 +18,13 @@
     overflow: auto;
 
   }
-.test {
+.products-wrapper {
     position: absolute;
     width: 100%;
     overflow-x: hidden; 
   }
   
-  .test-item { 
+  .product { 
     background-color: #ccc;
     text-align: center;
     border: 1px solid #999;
@@ -38,11 +38,24 @@
     position: relative;
   }
 
-  .test-item>div {
+  .product>div {
     position: absolute;
-    bottom: calc(50% - 10px);
     width: 100%;
-    font-size: 20px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .product .product-price {
+    position: absolute;
+    left: -1px;
+    bottom: -1px;
+    margin: 0;
+    background-color: #999;
+    padding: 3px 5px;
+    border-radius: 0 8px 0 0;
+
   }
 
   .cart {
