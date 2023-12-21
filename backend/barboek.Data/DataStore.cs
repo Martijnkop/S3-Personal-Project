@@ -1,17 +1,20 @@
 ﻿using barboek.Interface;
 using barboek.Interface.Models;
+using barboek.Interface.Models.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace barboek.Data;
 
 public class DataStore : DbContext
 {
-    public new DbSet<Account> Accounts { get; set; }
-    public new DbSet<Item> Items { get; set; }
-    public new DbSet<Order> Orders { get; set; }
-
-    public new DbSet<PriceType> PriceTypes { get; set; }
-    public new DbSet<Price> Prices { get; set; }
+    public new DbSet<DbUser> Users { get; set; }
+    public new DbSet<DbTaxType> TaxTypes { get; set; }
+    public new DbSet<DbTaxTypeInstance> TaxTypeInstances { get; set; }
+    public new DbSet<DbPriceType> PriceTypes { get; set; }
+    public new DbSet<DbItemCategory> ItemCategories { get; set; }
+    public new DbSet<DbItem> Items { get; set; }
+    public new DbSet<DbPrice> Prices { get; set; }
+    public new DbSet<DbOrder> Orders { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

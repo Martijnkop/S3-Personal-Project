@@ -22,120 +22,120 @@ namespace barboek.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("barboek.Interface.Models.Account", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbItem", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("FilePath")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("ItemCategoryId")
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Accounts");
-                });
-
-            modelBuilder.Entity("barboek.Interface.Models.Item", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("TaxTypeId")
                         .HasColumnType("uuid");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ItemCategoryId");
+
+                    b.HasIndex("TaxTypeId");
 
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.Order", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbItemCategory", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<Guid>("AccountOrderedId")
-                        .HasColumnType("uuid");
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
 
-                    b.Property<DateTime>("CreatedTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
-                    b.HasIndex("AccountOrderedId");
-
-                    b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("barboek.Interface.Models.OrderItem", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("ItemId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uuid");
-
-                    b.Property<int>("Quantity")
+                    b.Property<int>("Order")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId");
-
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("OrderItem");
+                    b.ToTable("ItemCategories");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.Price", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbOrder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("double precision");
-
-                    b.Property<DateTime?>("BeginTime")
+                    b.Property<DateTime>("CreatedTime")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<Guid?>("ItemId")
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
 
                     b.Property<Guid>("PriceTypeId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ItemId");
+                    b.HasIndex("PriceTypeId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbPrice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DbItemId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("PriceTypeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("StartTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DbItemId");
 
                     b.HasIndex("PriceTypeId");
 
                     b.ToTable("Prices");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.PriceType", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbPriceType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -146,39 +146,112 @@ namespace barboek.Data.Migrations
                     b.ToTable("PriceTypes");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.Order", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbTaxType", b =>
                 {
-                    b.HasOne("barboek.Interface.Models.Account", "AccountOrdered")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TaxTypes");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbTaxTypeInstance", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("BeginTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid?>("DbTaxTypeId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<float>("Percentage")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DbTaxTypeId");
+
+                    b.ToTable("TaxTypeInstances");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbUser", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<float>("Balance")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.DbOrderItem", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
+
+                    b.Property<Guid?>("DbOrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("ItemId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DbOrderId");
+
+                    b.HasIndex("ItemId");
+
+                    b.ToTable("DbOrderItem");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbItem", b =>
+                {
+                    b.HasOne("barboek.Interface.Models.Database.DbItemCategory", "ItemCategory")
                         .WithMany()
-                        .HasForeignKey("AccountOrderedId")
+                        .HasForeignKey("ItemCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AccountOrdered");
-                });
-
-            modelBuilder.Entity("barboek.Interface.Models.OrderItem", b =>
-                {
-                    b.HasOne("barboek.Interface.Models.Item", "Item")
+                    b.HasOne("barboek.Interface.Models.Database.DbTaxType", "TaxType")
                         .WithMany()
-                        .HasForeignKey("ItemId")
+                        .HasForeignKey("TaxTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("barboek.Interface.Models.Order", null)
-                        .WithMany("OrderedItems")
-                        .HasForeignKey("OrderId");
+                    b.Navigation("ItemCategory");
 
-                    b.Navigation("Item");
+                    b.Navigation("TaxType");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.Price", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbOrder", b =>
                 {
-                    b.HasOne("barboek.Interface.Models.Item", null)
-                        .WithMany("Prices")
-                        .HasForeignKey("ItemId");
-
-                    b.HasOne("barboek.Interface.Models.PriceType", "PriceType")
+                    b.HasOne("barboek.Interface.Models.Database.DbPriceType", "PriceType")
                         .WithMany()
                         .HasForeignKey("PriceTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -187,14 +260,56 @@ namespace barboek.Data.Migrations
                     b.Navigation("PriceType");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.Item", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbPrice", b =>
+                {
+                    b.HasOne("barboek.Interface.Models.Database.DbItem", null)
+                        .WithMany("Prices")
+                        .HasForeignKey("DbItemId");
+
+                    b.HasOne("barboek.Interface.Models.Database.DbPriceType", "PriceType")
+                        .WithMany()
+                        .HasForeignKey("PriceTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PriceType");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbTaxTypeInstance", b =>
+                {
+                    b.HasOne("barboek.Interface.Models.Database.DbTaxType", null)
+                        .WithMany("Instances")
+                        .HasForeignKey("DbTaxTypeId");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.DbOrderItem", b =>
+                {
+                    b.HasOne("barboek.Interface.Models.Database.DbOrder", null)
+                        .WithMany("OrderedItems")
+                        .HasForeignKey("DbOrderId");
+
+                    b.HasOne("barboek.Interface.Models.Database.DbItem", "Item")
+                        .WithMany()
+                        .HasForeignKey("ItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Item");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbItem", b =>
                 {
                     b.Navigation("Prices");
                 });
 
-            modelBuilder.Entity("barboek.Interface.Models.Order", b =>
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbOrder", b =>
                 {
                     b.Navigation("OrderedItems");
+                });
+
+            modelBuilder.Entity("barboek.Interface.Models.Database.DbTaxType", b =>
+                {
+                    b.Navigation("Instances");
                 });
 #pragma warning restore 612, 618
         }
