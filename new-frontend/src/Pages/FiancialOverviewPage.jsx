@@ -6,6 +6,19 @@ function FinancialOverviewPage() {
     const [taxTypes, setTaxTypes] = useState([])
     const [orders, setOrders] = useState([])
 
+    const totalPrice = () => {
+        let sum = 0;
+        orders.forEach(order => {
+            order.orderedItems.forEach(orderedItem => {
+                sum += orderedItem.item.activePrice.amount * orderedItem.amount
+            })
+        })
+        return <div>
+            Totale transacties:
+            <br />€{sum}
+        </div>;
+    }
+
     function sum() {
         let sum = 0;
         orders.forEach(order => {
@@ -60,11 +73,8 @@ function FinancialOverviewPage() {
 
     return (
         <div>
-            <div>
-                Totale transacties:
-                <br />
-                €{"1.00"}
-            </div>
+            
+            {totalPrice()}
             <div>
                 BTW uitsplitsing:
                 <br />

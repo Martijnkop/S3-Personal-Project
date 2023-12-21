@@ -165,4 +165,42 @@ public class ItemService : IItemService, IDbItemService
 
         return dbItem;
     }
+
+    public List<Item> GetByCategory(Guid categoryId, Guid priceTypeId)
+    {
+        DbPriceType dbPriceType = _priceTypeService.GetDbById(priceTypeId);
+
+        List<DbItem> dbItems = _dbContext.Items
+            .Include(dbItem => dbItem.Prices)
+                .ThenInclude(dbPrice => dbPrice.PriceType)
+            .Include(dbItem => dbItem.ItemCategory)
+            .Include(dbItem => dbItem.TaxType)
+                .ThenInclude(dbTaxType => dbTaxType.Instances)
+            .Where(dbItem => dbItem.ItemCategory.Id == categoryId)
+            .ToList();
+
+        List<Item> items = dbItems.Select(dbItem =>
+        {
+            DbPrice activePrice = dbItem.Prices
+                .Where(dbPrice => dbPrice.PriceType == dbPriceType)
+                .Where(dbPrice => dbPrice.StartTime == null || dbPrice.StartTime <= DateTime.UtcNow)
+                .Where(dbPrice => dbPrice.EndTime == null || dbPrice.EndTime >= DateTime.UtcNow)
+                .OrderByDescending(dbPrice => dbPrice.CreatedTime)
+                .FirstOrDefault(new DbPrice());
+
+
+
+            return new Item
+            {
+                Id = dbItem.Id,
+                Name = dbItem.Name,
+                FilePath = dbItem.FilePath,
+                ItemCategoryId = _itemCategoryService.MapDbToApi(dbItem.ItemCategory),
+                TaxType = _taxTypeService.MapDbToApi(dbItem.TaxType),
+                ActivePrice = _priceService.MapDbToApi(activePrice)
+            };
+        }).ToList();
+
+        return items;
+    }
 }

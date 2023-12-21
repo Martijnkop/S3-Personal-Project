@@ -47,10 +47,13 @@ public class ItemController : ControllerBase
         throw new NotImplementedException();
     }
 
-    [HttpGet("category/{category}")]
-    public ActionResult<List<Item>> GetByCategory(string category)
+    [HttpGet("category/{categoryId}/{priceTypeId}")]
+    public ActionResult<List<Item>> GetByCategory(Guid categoryId, Guid priceTypeId)
     {
-        throw new NotImplementedException();
+        if (categoryId == Guid.Empty) return BadRequest();
+        if (priceTypeId == Guid.Empty) return BadRequest();
+
+        return Ok(_itemService.GetByCategory(categoryId, priceTypeId));
     }
 
     [HttpGet("filter/{filter}")]
