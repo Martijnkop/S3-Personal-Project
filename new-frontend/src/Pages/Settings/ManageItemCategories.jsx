@@ -11,7 +11,14 @@ import { DndContext } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import ManageItemCategoriesRow from "../../Components/ManageItemCategoriesRow";
 
+import useIcons from "../../Util/useIcon";
 
+function useIcon(icon) {
+    const DynIcon = useIcons(icon)
+    return (
+        <DynIcon />
+    )
+}
 
 function ManageItemCategories() {
     const navigate = useNavigate()

@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 import HtmlRequest from "../../Util/HtmlRequest";
 import { useLocation } from "react-router-dom";
 
+import useIcons from "../../Util/useIcon";
+
+
+
 function HandleConfirm(name, icon, oldItemCategory) {
     // TODO: Update
 
@@ -53,15 +57,28 @@ function HandleConfirm(name, icon, oldItemCategory) {
 function CreateOrEditItemCategory() {
     const [name, setName] = useState('')
     const [icon, setIcon] = useState('')
+
+    const [iconDisplay, setIconDisplay] = useState(<></>)
+
+    const [iconValid, setIconValid] = useState(false)
+
+    function displayIcon(i) {
+        const DynIcon = useIcons(i, setIconValid)
+        return (
+            <DynIcon />
+        )
+    }
+
     const data = useLocation();
     let state = data.state;
 
-    console.log(name)
-    
+    console.log(iconValid)
+
     useEffect(() => {
         if (state != null && state.id != null && state.name != null) {
             setName(state.name)
         }
+        setIconDisplay(displayIcon(""))
     },[])
 
     return (
@@ -73,13 +90,15 @@ function CreateOrEditItemCategory() {
                 }}/>
                 <h2>Name:</h2>
                 <h2>Preview</h2>
-                <Icon >{icon}</Icon>
+                {iconDisplay}
+                {/* <Icon >{icon}</Icon> */}
                 <TextField label="Name" variant = "outlined" required value={icon} fullWidth onChange={(event) => {
+                    setIconDisplay(displayIcon(event.target.value))
                     setIcon(event.target.value)
                 }}/>
             </form>
             <div className="create-confirm-wrapper w100">
-                <Button variant='contained' onClick = {() => HandleConfirm(name, icon, state)}>Confirm</Button>
+                <Button variant='contained' onClick = {() => {if (iconValid) HandleConfirm(name, icon, state)}}>Confirm</Button>
             </div>
         </CardPage>
     )
