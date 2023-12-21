@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\barboek.Data\barboek.Data.csproj" />
+    <ProjectReference Include="..\barboek.Services\barboek.Services.csproj" />
   </ItemGroup>
 
 </Project>

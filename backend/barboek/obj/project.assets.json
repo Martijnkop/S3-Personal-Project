@@ -534,6 +534,20 @@
         "runtime": {
           "bin/placeholder/barboek.Interface.dll": {}
         }
+      },
+      "barboek.Services/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "barboek.Data": "1.0.0",
+          "barboek.Interface": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/barboek.Services.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/barboek.Services.dll": {}
+        }
       }
     }
   },
@@ -1258,6 +1272,11 @@
       "type": "project",
       "path": "../barboek.interface/barboek.Interface.csproj",
       "msbuildProject": "../barboek.interface/barboek.Interface.csproj"
+    },
+    "barboek.Services/1.0.0": {
+      "type": "project",
+      "path": "../barboek.Services/barboek.Services.csproj",
+      "msbuildProject": "../barboek.Services/barboek.Services.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1266,7 +1285,8 @@
       "Microsoft.IdentityModel.Tokens >= 7.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "System.IdentityModel.Tokens.Jwt >= 7.0.0",
-      "barboek.Data >= 1.0.0"
+      "barboek.Data >= 1.0.0",
+      "barboek.Services >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1298,6 +1318,9 @@
           "projectReferences": {
             "C:\\Users\\marti\\Code\\barboek\\backend\\barboek.Data\\barboek.Data.csproj": {
               "projectPath": "C:\\Users\\marti\\Code\\barboek\\backend\\barboek.Data\\barboek.Data.csproj"
+            },
+            "C:\\Users\\marti\\Code\\barboek\\backend\\barboek.Services\\barboek.Services.csproj": {
+              "projectPath": "C:\\Users\\marti\\Code\\barboek\\backend\\barboek.Services\\barboek.Services.csproj"
             }
           }
         }

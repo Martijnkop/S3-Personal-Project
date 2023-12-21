@@ -1,0 +1,19 @@
+.navbar {
+    width: 150px;
+    background-color: rgb(255,255,255);
+  }
+  
+  .nav-icon {
+    border-radius: 0!important;
+  }
+  
+  .nav-icon>svg {
+    font-size: 100px!important;
+    margin: 17px;
+    color: rgb(55,55,55);
+    transition: color linear 100ms;
+  }
+  
+  .nav-icon>svg:hover {
+    color: rgb(85,85,85);
+  }

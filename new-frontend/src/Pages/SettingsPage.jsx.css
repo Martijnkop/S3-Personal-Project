@@ -1,0 +1,47 @@
+.settings-page {
+    margin: 10px;
+    column-count: 3;
+}
+
+@media (max-width: 1300px){
+    .settings-page {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 900px){
+    .settings-page {
+        column-count: 1;
+    }
+}
+
+.cardlist-wrapper {
+    padding: 10px;
+    break-inside: avoid;
+}
+
+.cardlist-header {
+    margin: 5px 0;
+}
+
+.cardlist-card button {
+    padding: 10px 20px;
+    color: black;
+    justify-content: flex-start;
+}
+
+.cardlist-card button:first-of-type {
+    padding: 20px 20px 10px 20px;
+}
+
+.cardlist-card button:last-of-type {
+    padding: 10px 20px 20px 20px;
+}
+
+.cardlist-card button:only-of-type {
+    padding: 20px;
+}
+
+.cardlist-card div:first-of-type hr {
+    display: none;
+}

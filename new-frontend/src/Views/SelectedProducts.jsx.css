@@ -1,0 +1,37 @@
+.selected-products {
+    width: 350px;
+    height: 100%;
+    background-color: rgb(255,255,255);
+    display: flex;
+    flex-direction: column;
+}
+
+.item-list {
+    height: 80%;
+}
+
+.selected-item {
+    background-color: rgb(205,205,205);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-item:nth-child(2n - 1) {
+    background-color: rgb(225,225,225);
+}
+
+.selected-products-actions {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+    font-size: 30px;
+}
+
+.products-confirm {
+    margin: 20px!important;
+}
