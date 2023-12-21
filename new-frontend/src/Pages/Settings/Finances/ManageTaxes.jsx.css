@@ -1,0 +1,10 @@
+.table-wrapper {
+    height: 100%;
+    overflow-y: auto;
+}
+
+.add-taxtype {
+    position: absolute!important;
+    right: 20px;
+    bottom: 20px;
+}

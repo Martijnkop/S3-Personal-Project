@@ -1,0 +1,27 @@
+.table-content:last-child td,
+.table-content:last-child th {
+    border: 0;
+}
+
+.table-name {
+    width: 60%;
+    text-align: left;
+}
+
+.table-edit {
+    text-align: right!important;
+}
+
+.table-active {
+    text-align: right!important;
+}
+
+.table-content .table-active {
+    padding-right: 0!important;
+}
+
+.add-pricetype {
+    position: absolute!important;
+    right: 20px;
+    bottom: 20px;
+}
